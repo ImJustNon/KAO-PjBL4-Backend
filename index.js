@@ -17,6 +17,25 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.json());
 
+app.get("/api/v1/student", async(req, res) =>{
+    const getStudentAll = await prisma.student.findMany({
+        select: {
+            student_id: true,
+            student_prefix: true,
+            student_firstname: true,
+            student_lastname: true,
+            student_nickname: true,
+            created_at: true,
+            updated_at: true
+        }
+    });
+    return res.json({
+        status: "OK",
+        message: "This is all student data",
+        data: getStudentAll,
+    });
+});
+
 app.post("/api/v1/student/register", async(req, res) =>{
     const { studentId, studentPrefix, studentFirstname, studentLastname, studentNickname } = req.body ?? {};
     if(!studentId || !studentPrefix || !studentFirstname || !studentLastname || !studentNickname){
@@ -34,7 +53,7 @@ app.post("/api/v1/student/register", async(req, res) =>{
     }
     
     try {
-        await prisma.students.create({
+        await prisma.student.create({
             data: {
                 student_id: studentId,
                 student_prefix: studentPrefix,

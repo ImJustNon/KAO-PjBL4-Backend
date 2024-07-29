@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Students {
+model Student {
   student_uuid          String      @id @default(uuid()) @unique
   student_id            String      @unique
   student_prefix        String     
