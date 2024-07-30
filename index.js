@@ -20,6 +20,7 @@ app.use(express.json());
 app.get("/api/v1/student", async(req, res) =>{
     const getStudentAll = await prisma.student.findMany({
         select: {
+            student_uuid: true,
             student_id: true,
             student_prefix: true,
             student_firstname: true,
