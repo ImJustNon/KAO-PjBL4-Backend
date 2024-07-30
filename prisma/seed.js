@@ -3,7 +3,7 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 async function main() {
-  const initStudent = await prisma.students.create({
+  const initStudent = await prisma.student.create({
     data: {
         student_id: "65202910002",
         student_prefix: "เด็กชาย",
